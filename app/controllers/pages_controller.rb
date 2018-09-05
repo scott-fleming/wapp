@@ -6,4 +6,8 @@ class PagesController < ApplicationController
   def about
     # render 'about.html.erb'
   end
+
+  def sdflming
+    # render 'sdflming.html.erb'
+  end
 end
