@@ -12,7 +12,7 @@ class QuizzesController < ApplicationController
   end
 
   def index
-    @quizzes = Quiz.all
+    @quizzes = current_user.quizzes
     # render 'quizzes/index.html.erb'
   end
 
@@ -32,7 +32,8 @@ class QuizzesController < ApplicationController
 
   def create
     @quiz = Quiz.new(params.require(:quiz).permit(:title, :description))
-    if @quiz.save
+    current_user.quizzes << @quiz
+    if current_user.save
       redirect_to quiz_url(@quiz), notice: 'Quiz was successfully created.'
     else
       flash.now[:alert] = 'Error! Unable to create quiz.'
